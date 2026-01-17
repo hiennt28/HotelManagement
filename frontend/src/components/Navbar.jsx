@@ -61,7 +61,7 @@ const Navbar = ({ user, setUser }) => {
                                     <li onClick={() => { navigate('/bookings'); setShowDropdown(false); }}>
                                         <History size={16} /> Lịch sử đặt phòng
                                     </li>
-                                    {/* Bạn có thể thêm 'Hồ sơ cá nhân' ở đây nếu muốn */}
+                                    {}
                                     <li onClick={handleLogout} style={{ color: 'var(--danger)', borderTop: '1px solid #f1f5f9' }}>
                                         <LogOut size={16} /> Đăng xuất
                                     </li>

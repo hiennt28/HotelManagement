@@ -8,13 +8,11 @@ import { useNavigate } from 'react-router-dom';
 
 const UserHome = () => {
     const navigate = useNavigate();
-    
-    // --- STATE DATA ---
+   
     const [rooms, setRooms] = useState([]);
     const [filteredRooms, setFilteredRooms] = useState([]);
     const [filter, setFilter] = useState({ type: 'All', maxPrice: '' });
-    
-    // --- STATE MODAL NGHIỆP VỤ ---
+   
     const [selectedRoom, setSelectedRoom] = useState(null); // Modal đặt phòng
     const [bookingData, setBookingData] = useState({
         checkIn: '', 
@@ -23,11 +21,9 @@ const UserHome = () => {
         customerPhone: ''
     });
 
-    // --- STATE MODAL THÔNG BÁO (SYSTEM) ---
     const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
     const [confirmModal, setConfirmModal] = useState({ show: false, message: '', onConfirm: null });
 
-    // --- EFFECT ---
     useEffect(() => {
         api.get('/rooms').then(res => {
             setRooms(res.data);
@@ -42,7 +38,7 @@ const UserHome = () => {
         setFilteredRooms(result);
     }, [filter, rooms]);
 
-    // --- HELPER SHOW MODAL ---
+  
     const showNotify = (msg, type = 'success') => {
         setNotification({ show: true, message: msg, type });
         if(type === 'success') setTimeout(() => setNotification({ show: false, message: '', type: 'success' }), 3000);
@@ -52,7 +48,7 @@ const UserHome = () => {
         setConfirmModal({ show: true, message: msg, onConfirm: action });
     };
 
-    // --- HANDLERS ---
+   
     const handleOpenBooking = (room) => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (!user) {
@@ -91,7 +87,6 @@ const UserHome = () => {
                 total_price: totalPrice
             });
 
-            // Thay alert thành Notify Modal
             showNotify('Đặt phòng thành công! Vui lòng chờ Admin xác nhận.');
             
             // Đóng form đặt phòng sau khi thành công
@@ -103,7 +98,7 @@ const UserHome = () => {
         }
     };
 
-    // --- RENDER ---
+    //  RENDER
     return (
         <div style={{ paddingBottom: '80px' }}>
             {/* HERO SECTION */}
@@ -219,7 +214,7 @@ const UserHome = () => {
                 </div>
             </div>
 
-            {/* ================= MODALS SECTION ================= */}
+            {/* MODALS SECTION  */}
 
             {/* 1. BOOKING FORM MODAL */}
             {selectedRoom && (

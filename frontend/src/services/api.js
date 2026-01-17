@@ -11,7 +11,6 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
     const user = localStorage.getItem('user');
     if (user) {
-        // Nếu bạn có dùng JWT token thì thêm vào đây, hiện tại demo đơn giản thì chưa cần
     }
     return config;
 });

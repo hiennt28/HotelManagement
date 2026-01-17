@@ -46,7 +46,7 @@ function App() {
                         </AdminRoute>
                     } />
 
-                    {/* Trang lịch sử đặt phòng (Mới) */}
+                    {/* Trang lịch sử đặt phòng  */}
                     <Route path="/bookings" element={
                         user ? <BookingHistory /> : <Navigate to="/login" />
                     } />

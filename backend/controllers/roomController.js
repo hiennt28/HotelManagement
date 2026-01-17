@@ -12,7 +12,7 @@ exports.getRooms = (req, res) => {
 
 // 2. Thêm phòng mới
 exports.addRoom = (req, res) => {
-  // Lấy dữ liệu từ Frontend gửi lên (Lưu ý: Frontend gửi biến 'number' và 'image')
+  // Lấy dữ liệu từ Frontend gửi lên 
   const { number, type, price, image } = req.body;
 
   // Validate dữ liệu cơ bản
@@ -20,8 +20,6 @@ exports.addRoom = (req, res) => {
     return res.status(400).json({ message: 'Vui lòng nhập số phòng và giá!' });
   }
 
-  // Chuẩn bị object dữ liệu để lưu vào Database
-  // QUAN TRỌNG: Phải đổi tên key cho khớp với cột trong MySQL ('room_number', 'image_url')
   const newRoom = { 
     room_number: number, 
     type, 
@@ -33,14 +31,14 @@ exports.addRoom = (req, res) => {
   RoomModel.create(newRoom, (err, result) => {
     if (err) {
       console.error("Lỗi thêm phòng:", err); 
-      // Trả về lỗi chi tiết để dễ debug (VD: trùng số phòng)
+      // Trả về lỗi chi tiết để dễ debug 
       return res.status(500).json({ error: 'Lỗi Database: ' + err.sqlMessage });
     }
     res.json({ message: 'Thêm phòng thành công!', id: result.insertId });
   });
 };
 
-// 3. Cập nhật thông tin phòng (MỚI)
+// 3. Cập nhật thông tin phòng 
 exports.updateRoom = (req, res) => {
   const { id } = req.params;
   const { number, type, price, image } = req.body;

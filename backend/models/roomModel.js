@@ -9,7 +9,6 @@ const RoomModel = {
 
   // Thêm phòng mới
   create: (newRoom, callback) => {
-    // Dùng cú pháp SET ? giúp MySQL tự map object {room_number: 101...} vào cột tương ứng
     const query = 'INSERT INTO rooms SET ?';
     db.query(query, newRoom, callback);
   },

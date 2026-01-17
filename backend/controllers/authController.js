@@ -16,13 +16,11 @@ exports.login = (req, res) => {
 
     const user = results[0];
 
-    // LƯU Ý: Ở đây so sánh password thô (plain text) để đơn giản hóa việc học.
-    // Thực tế bạn NÊN dùng thư viện 'bcrypt' để so sánh mật khẩu đã mã hóa.
     if (password !== user.password) {
       return res.status(401).json({ message: 'Sai mật khẩu' });
     }
 
-    // Trả về thông tin user (loại bỏ password để bảo mật)
+    // Trả về thông tin user 
     const { password: _, ...userWithoutPassword } = user;
     
     res.json({
@@ -56,7 +54,7 @@ exports.register = (req, res) => {
   });
 };
 
-// Thêm hàm updateProfile
+//  hàm updateProfile
 exports.updateProfile = (req, res) => {
     const { id, full_name, phone, password } = req.body;
     // Nếu có password mới thì update cả password, không thì chỉ update thông tin
@@ -68,7 +66,7 @@ exports.updateProfile = (req, res) => {
         params = [full_name, phone, password, id];
     }
 
-    const db = require('../config/db'); // Đảm bảo import db
+    const db = require('../config/db'); 
     db.execute(query, params, (err, result) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ success: true, message: 'Cập nhật hồ sơ thành công!' });
